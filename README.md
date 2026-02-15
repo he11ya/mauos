@@ -161,4 +161,6 @@ Inspired by:
 
 ## License
 
-MIT
+MIT License with Attribution Requirement
+
+Copyright (c) 2026 Mauos Contributors
