@@ -154,8 +154,8 @@ mauos/
 ## Inspiration
 
 Inspired by: 
-**AI Mindset** by Alex Povalyaev: [https://aimindset.org/](https://aimindset.org/)
-**CYBOS** by Gerstep: [https://github.com/Gerstep/cybos](https://github.com/Gerstep/cybos)
+**AI Mindset** by Alex Povalyaev: [aimindset](https://aimindset.org/)
+**CYBOS** by Gerstep: [CybOS](https://github.com/Gerstep/cybos)
 
 ---
 
