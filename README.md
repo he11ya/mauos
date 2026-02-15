@@ -1,56 +1,32 @@
-MAUOS
+# MAUOS
 
-Multi-Agent Universal Operating System — file-first операционная система для личных и командных проектов, исследований и управления оркестром нейросетей (текст, графика, музыка).
-Всё состояние — в Markdown/файлах. Агенты и MCP-инструменты — поверх, как “исполнители” и “порты”.
+**MAUOS (Multi‑Agent Universal Operating System)** — file‑first система для проектов, исследований и оркестра нейросетей (текст · графика · музыка).  
+Данные живут в файлах (Markdown + assets). Агенты и инструменты — сверху, как исполняемый слой.
 
-Quick Start
+---
 
-Создай “Vault” (Obsidian-хранилище) для MAUOS
+## Зачем
 
-Подключи MCP-серверы (по желанию: web/research, telegram, gmail/calendar, image, audio)
+- **Одна архитектура** для личных и бизнес‑проектов, исследований и продакшна контента.
+- **Воспроизводимость**: у каждого результата есть бриф → промпты/настройки → версии → финал.
+- **Мультимодальность**: текст/изображения/аудио одинаково становятся артефактами, которые можно хранить, сравнивать, переиспользовать.
+- **Прозрачность**: видно, что делалось, почему и чем.
 
-Запусти базовые workflows: capture → triage → research → produce → publish → archive
+---
 
-Цель: одна архитектура, куда ты можешь “вкладывать” любые проекты (личные/бизнес), исследования и продакшн-потоки контента.
+## Архитектура
 
-Commands (примерная идея)
-Research
-
-/mau-research-topic "X" — собрать карту темы + источники + конспект
-
-/mau-research-market "Y" — рынок/игроки/тренды/риски
-
-/mau-research-company "Z" — due diligence / профайл
-
-Content (text/image/audio)
-
-/mau-draft "тема" — черновик поста/эссе/скрипта
-
-/mau-image "концепт" — бриф + генерация (и сохранение промпта/версий)
-
-/mau-audio "концепт" — музыка/саунд-дизайн (бриф + версии)
-
-Ops / PKM
-
-/mau-inbox — разобрать входящее (заметки/ссылки/сообщения)
-
-/mau-brief — утренний бриф (сегодня/риски/фокус/контекст)
-
-/mau-reindex — пересобрать индекс сущностей/проектов
-
-(Это не обязательно именно “slash commands”, но такой интерфейс удобно документировать — как в CYBOS.)
-
-Architecture
+```text
 MAUOS
 ├── CORE (principles + conventions)
-│   ├── Naming, Tags, Index Types, Templates
-│   └── Security: private/shared split
+│   ├── naming / tags / file-types
+│   └── templates / security split
 │
 ├── SKILLS (workflows)
-│   ├── Capture / Inbox / Triage
-│   ├── Research / Sensemaking / Synthesis
-│   ├── Build / Ship / Publish
-│   └── Review / Retro / Improve
+│   ├── Capture → Inbox → Triage
+│   ├── Research → Sensemaking → Synthesis
+│   ├── Build → Ship → Publish
+│   └── Review → Retro → Improve
 │
 ├── AGENTS (roles)
 │   ├── Research: scout, analyst, fact-checker
@@ -65,27 +41,31 @@ MAUOS
 │   └── Audio models (music/voice)
 │
 └── CONTEXT (identity + style + entities)
-    ├── You (voice, tone, principles)
+    ├── Voice & rules (how to write/think)
     ├── Projects (active intents)
-    └── Knowledge graph (people/orgs/terms)
+    └── Entities (people/orgs/terms)
+```
 
+---
 
-Design principles (как “конституция”):
+## Принципы
 
-File-first: состояние живёт на диске (md, assets), а не в “чате”
+- **File‑first**: состояние хранится на диске, а не в чате.
+- **Vault‑based**: данные отделены от кода (можно переносить/синкать/бэкапить).
+- **Private/Shared split**: личное локально, командное — через Git/Sync.
+- **Agent‑ready**: структура понятна людям и агентам.
+- **Reproducible**: каждый артефакт “собирается” из входов и фиксирует контекст.
 
-Vault-based: данные отдельно от кода (хранилище можно переносить/синкать)
+---
 
-Private/Shared split: личное локально, командное — через Git/Sync
+## Структура хранилища (Vault)
 
-Multi-modal orchestration: текст/картинки/музыка одинаково “файловые артефакты”
+> Это про **данные** (Obsidian‑vault). Репозиторий MAUOS — про **код/доки/шаблоны**.
 
-Reproducibility: у каждого результата есть: бриф → промпты/настройки → версии → финал
-
-File Structure (Vault)
+```text
 ~/MAUOSVault/
-├── private/                      # личное (не синкаем)
-│   ├── context/                  # identity, style, keys refs (без секретов в git)
+├── private/                      # личное (не коммитим)
+│   ├── context/                  # identity, style, preferences
 │   ├── inbox/                    # входящее: ссылки/заметки/голос/фото
 │   ├── projects/                 # личные проекты
 │   ├── research/                 # исследования
@@ -101,30 +81,74 @@ File Structure (Vault)
 │   ├── studio/
 │   └── context/calls/            # общие транскрипты/встречи
 │
-└── indexes/                      # “оглавления” и типовые входы
+└── indexes/                      # «оглавления» и входы
     ├── INDEX_PROJECTS.md
     ├── INDEX_RESEARCH.md
     ├── INDEX_STUDIO.md
     └── INDEX_ENTITIES.md
+```
 
-Repo Structure (code + docs)
+---
+
+## Структура репозитория (code + docs)
+
+```text
 mauos/
-├── .claude/ or .agents/          # профили агентов, workflows, hooks
+├── agents/                       # профили ролей и правила взаимодействия
+├── skills/                       # описания workflows + чеклисты
 ├── mcp/                          # конфиги портов/серверов
-├── scripts/                      # утилиты (reindex, export, publish)
-├── docs/                         # гайды, принципы, examples
+├── templates/                    # шаблоны файлов (project/research/studio)
+├── scripts/                      # утилиты: reindex, export, publish
+├── docs/                         # гайды и примеры
 └── README.md
+```
 
-Documentation
+---
 
-Setup: как завести Vault, синк, приватность, базовые папки
+## Quick Start
 
-Conventions: нейминг/теги/типы файлов/шаблоны
+1) Создай Vault `MAUOSVault/` и базовые папки (см. дерево выше).  
+2) Добавь индексы в `indexes/` и шаблоны в `templates/`.  
+3) Подключи порты (MCP) по необходимости: web/research, telegram, gmail/calendar, image, audio.  
+4) Начни с 3 потоков:
 
-Workflows: research → synthesis → publish; studio pipelines (image/audio)
+- **Capture → Inbox → Triage** (каждый день)
+- **Research → Synthesis** (по запросу)
+- **Build → Ship → Publish** (под релизы и контент)
 
-MCP Ports: список поддерживаемых инструментов и как подключать
+---
 
-License
+## Workflows (коротко)
 
-MIT
+### Research
+- собрать карту темы
+- достать источники и цитаты
+- сделать синтез: тезисы / риски / вопросы / next steps
+
+### Studio (text / image / audio)
+- бриф
+- прототип (черновик/эскиз/демо)
+- версии (A/B)
+- финал + упаковка + публикация
+- сохранение промптов и параметров рядом
+
+### Ops
+- weekly review
+- календарь/планирование
+- “архив как продукт” (чтобы через 3 месяца всё было понятно)
+
+---
+
+## Roadmap (draft)
+
+- [ ] Минимальные шаблоны: `project`, `research`, `studio-text`, `studio-image`, `studio-audio`
+- [ ] Индекс типов файлов (transcripts/messages/articles/assets)
+- [ ] Стандарт метаданных (frontmatter)
+- [ ] Скрипты: reindex / export / publish
+- [ ] Подключение портов: web + telegram + mail/calendar + image + audio
+
+---
+
+## License
+
+MIT (или поменяем под твою модель распространения).
