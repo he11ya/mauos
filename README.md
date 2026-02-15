@@ -3,6 +3,8 @@
 **MAUOS (Multi‑Agent Universal Operating System)** — file‑first система для проектов, исследований и оркестра нейросетей (текст · графика · музыка).  
 Данные живут в файлах (Markdown + assets). Агенты и инструменты — сверху, как исполняемый слой.
 
+> **Статус:** Alpha — в активной разработке.
+
 ---
 
 ## Зачем
@@ -149,6 +151,14 @@ mauos/
 
 ---
 
+## Inspiration
+
+Inspired by: 
+**AI Mindset** by Alex Povalyaev: [https://aimindset.org/](https://aimindset.org/)
+**CYBOS** by Gerstep: [https://github.com/Gerstep/cybos](https://github.com/Gerstep/cybos)
+
+---
+
 ## License
 
-MIT (или поменяем под твою модель распространения).
+MIT
