@@ -2,7 +2,6 @@
 # buddy.1m.sh — тамагочи в статус-баре, обновляется каждую минуту
 
 STATE_FILE="$HOME/.buddy_state"
-LIMITS_FILE="$HOME/.buddy_limits"
 MAUOS_DIR="$HOME/Dropbox/Obsidian_Vault/MAUOS"
 
 # --- Инициализация состояния ---
@@ -12,13 +11,6 @@ if [ ! -f "$STATE_FILE" ]; then
 fi
 
 source "$STATE_FILE"
-
-# --- Лимиты Claude (обновляй вручную в ~/.buddy_limits) ---
-SESSION_USED=0
-SESSION_RESET="?"
-WEEKLY_USED=0
-WEEKLY_RESET="?"
-[ -f "$LIMITS_FILE" ] && source "$LIMITS_FILE"
 
 # --- Считаем минуты с последнего сброса ---
 NOW=$(date +%s)
@@ -79,11 +71,6 @@ echo "${FACE} ${ELAPSED}m"
 echo "---"
 echo "Состояние: ${STATUS}"
 echo "Работаю: ${ELAPSED} минут"
-echo "---"
-echo "Claude Pro — лимиты"
-echo "Сессия:  ${SESSION_COLOR} ${SESSION_USED}%/100% · сброс через ${SESSION_RESET}"
-echo "Неделя:  ${WEEKLY_COLOR} ${WEEKLY_USED}%/100% · сброс ${WEEKLY_RESET}"
-echo "✏️ Обновить лимиты | bash='open ~/.buddy_limits' terminal=false"
 echo "---"
 echo "✅ Сделал перерыв (сброс таймера) | bash='echo START=$(date +%s) > $STATE_FILE && echo ENERGY=0 >> $STATE_FILE' terminal=false refresh=true"
 echo "☕ Выпил чай (+10 мин энергии) | bash='echo START=$(( $(date +%s) - 600 )) > $STATE_FILE' terminal=false refresh=true"
