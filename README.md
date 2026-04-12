@@ -92,18 +92,21 @@ MAUOS
 
 ---
 
-## Структура репозитория (code + docs)
+## Структура репозитория (текущий скелет)
 
 ```text
 mauos/
-├── agents/                       # профили ролей и правила взаимодействия
-├── skills/                       # описания workflows + чеклисты
-├── mcp/                          # конфиги портов/серверов
-├── templates/                    # шаблоны файлов (project/research/studio)
-├── scripts/                      # утилиты: reindex, export, publish
-├── docs/                         # гайды и примеры
-└── README.md
+├── AGENTS.md                     # правила для агентов (Claude Code / Codex / Cursor)
+├── CLAUDE.md                     # обезличенный контекст; личное — в CLAUDE.local.md (не в Git)
+├── README.md
+├── LICENSE
+├── 00_core/                      # канон, план внедрения в Obsidian
+├── 40_ops/                       # ops, чеклисты, пример SwiftBar (см. MAUOS_setup_checklist.md)
+├── 99_indexes/                   # входные индексы
+└── _templates/                   # шаблоны заметок Obsidian
 ```
+
+Планируемые слои (как в roadmap): `agents/`, `skills/`, `mcp/`, `scripts/`, `docs/` — по мере появления.
 
 ---
 
